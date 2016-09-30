@@ -3,5 +3,9 @@
 
 ![alt](screencast/demo.gif)
 
-## Installation
-Install the plugin from [Chrome Web Store](https://chrome.google.com/webstore/detail/game-of-life/bhhddgpklpjchoemcgggncekimleaaok)
+## How to Play
+
+  * Install this plugin from [Chrome Web Store](https://chrome.google.com/webstore/detail/game-of-life/bhhddgpklpjchoemcgggncekimleaaok)
+  * Click the `Play` button from anyone's GitHub home page:
+
+  ![alt](screencast/play.png)

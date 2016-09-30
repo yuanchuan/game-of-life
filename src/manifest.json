@@ -1,0 +1,32 @@
+{
+    "name" : "Game-of-life",
+    "version" : "1.0",
+    "description" : "Play Conway's Game of life on GitHub contribution board",
+    "icons": {
+      "16": "icons/logo48.png",
+      "48": "icons/logo128.png",
+      "128": "icons/logo256.png",
+      "256": "icons/logo256.png"
+    },
+    "content_scripts": [{
+      "matches": ["https://github.com/*"],
+      "exclude_matches": [
+        "https://github.com/*/*",
+        "https://github.com/",
+        "https://github.com/new/*",
+        "https://github.com/settings/*",
+        "https://github.com/pricing/*",
+        "https://github.com/blog/*",
+        "https://github.com/contact/*",
+        "https://github.com/site/*",
+        "https://github.com/about/*"
+      ],
+      "css": ["style.css"],
+      "js": ["index.js"],
+      "run_at": "document_end"
+    }],
+    "permissions": [
+        "https://github.com/"
+    ],
+    "manifest_version": 2
+}

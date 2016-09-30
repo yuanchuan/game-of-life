@@ -1,0 +1,202 @@
+[data-gol-container] {
+  position: relative;
+}
+
+[data-gol-container] .flash-notice {
+  display: none;
+}
+
+.border[data-gol-container] {
+  border-color: transparent !important;
+}
+
+#gol-contribution-board {
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+#gol-contribution-board:after {
+  content: '';
+  clear: both;
+  display: block;
+  visibility: hidden;
+}
+
+#gol-contribution-board ul {
+  float: left;
+}
+
+#gol-contribution-board li {
+  display: block;
+  font-size: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #eee;
+  transition: background-color .2s ease;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+}
+
+[data-gol-container="running"] li[style$="238);"] {
+  opacity: .8;
+}
+[data-gol-container]:not([data-gol-container="running"])
+#gol-contribution-board li:hover {
+  cursor: pointer;
+  z-index: 2;
+  outline: 1px solid rgba(30, 104, 35, 0.55);
+}
+
+#gol-controls {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: -32px;
+  padding-left: 40px;
+}
+
+#gol-controls a {
+  display: inline-block;
+  padding: 2px 0;
+  text-decoration: none;
+  font-size: .8em;
+  width: 5em;
+  border: 1px solid rgba(140, 198, 101, .3);
+  color: rgba(140, 198, 101, .8);
+  margin: 0 2px;
+  cursor: pointer;
+  position: relative;
+  transition: all .2s ease;
+  border-radius: 2px;
+}
+
+#gol-controls a:after {
+  content: attr(data-action);
+}
+
+#gol-controls a[data-action="close"] {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border:none;
+  background: none;
+  color: #d6e685;
+  line-height: 0;
+  font-size: 0;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+#gol-controls a[data-action="close"]:before,
+#gol-controls a[data-action="close"]:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 61.8%;
+  height: 1px;
+  background: #bfd06b;
+  -webkit-transfom-origin 50% 50%;
+          transfom-origin 50% 50%;
+}
+
+#gol-controls a[data-action="close"]:before {
+  -webkit-transform: translate(-50%, 0) rotate(-45deg);
+          transform: translate(-50%, 0) rotate(-45deg);
+}
+#gol-controls a[data-action="close"]:after {
+  -webkit-transform: translate(-50%, 0) rotate(45deg);
+          transform: translate(-50%, 0) rotate(45deg);
+}
+
+#gol-controls a[data-action="close"]:hover:before,
+#gol-controls a[data-action="close"]:hover:after {
+  background-color: #d0b96b;
+}
+
+#gol-controls a[data-action="run"] {
+  border-color: rgba(140, 198, 101, 0.7);
+  background-color: rgba(192, 247, 155, .13);
+}
+
+#gol-controls a[data-action="pause"] {
+  background-color: rgba(214, 230, 133, .18);
+  border-color: #d6e685;
+  color: #9bb517;
+}
+
+#gol-controls a[disabled] {
+  background: transparent;
+  border-color: rgba(160, 165, 157, .69);;
+  color: rgba(160, 165, 157, .69);
+  opacity: .5;
+  cursor: default;
+}
+
+#gol-controls a[data-action="run"]:not([disabled]):hover {
+  background-color: rgba(237, 255, 200, .35);
+}
+
+#gol-controls a[data-action="next"]:not([disabled]):hover,
+#gol-controls a[data-action="clear"]:not([disabled]):hover,
+#gol-controls a[data-action="reset"]:not([disabled]):hover {
+  border-color: rgba(140, 198, 101, 0.7);
+  color: #8cc665;
+}
+
+#gol-controls a[data-action="next"]:not([disabled]):active,
+#gol-controls a[data-action="clear"]:not([disabled]):active,
+#gol-controls a[data-action="reset"]:not([disabled]):active {
+  background: rgba(247,254,242,0.5);
+}
+
+#gol-generation {
+  position: absolute;
+  left: 4px;
+  top: -10px;
+  font-size: 12px;
+  color: #b6b6b6;
+}
+#gol-generation:before {
+  content: 'Generation: ';
+  margin-right: 2px;
+}
+
+#gol-button-play {
+  float: left;
+  margin-right: 1em;
+  padding: 0 5px 0 9px;
+  box-shadow: rgba(140, 198, 101, .25) 0px 0px 0px 1px;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #8cc665;
+  transition: all .2s ease;
+  border-radius: 2px;
+}
+#gol-button-play:hover {
+  text-decoration: none;
+  box-shadow: rgba(140, 198, 101, .69) 0px 0px 0px 1px;
+}
+
+#gol-button-play:before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 8px;
+  color: #8cc665;
+  vertical-align: middle;
+  margin-top: -1px;
+  box-shadow:
+    0 -4px #8cc665,
+    4px 0 #8cc665,
+    -4px 4px #8cc665,
+    0 4px #8cc665,
+    4px 4px #8cc665;
+}

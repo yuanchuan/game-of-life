@@ -1,7 +1,7 @@
 # Game of Life
-> Play Conway's Game of life on GitHub contribution board.
+> Play [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) on GitHub contribution board.
 
-![alt](screencast/head.png)
+![alt](screencast/demo.gif)
 
 ## Installation
-Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/game-of-life/bhhddgpklpjchoemcgggncekimleaaok)
+Install the plugin from [Chrome Web Store](https://chrome.google.com/webstore/detail/game-of-life/bhhddgpklpjchoemcgggncekimleaaok)

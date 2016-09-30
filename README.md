@@ -5,7 +5,7 @@
 
 ## How to Play
 
-  * Install this plugin from [Chrome Web Store](https://chrome.google.com/webstore/detail/game-of-life/bhhddgpklpjchoemcgggncekimleaaok)
-  * Click the `Play` button from anyone's GitHub home page:
+  1. Install this plugin from [Chrome Web Store](https://chrome.google.com/webstore/detail/game-of-life/bhhddgpklpjchoemcgggncekimleaaok)
+  2. Click the `Play` button from anyone's GitHub profile page:
 
   ![alt](screencast/play.png)

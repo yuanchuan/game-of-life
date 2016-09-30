@@ -3,5 +3,5 @@
 
 ![alt](screencast/head.png)
 
-#### Installation
+## Installation
 Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/game-of-life/bhhddgpklpjchoemcgggncekimleaaok)

@@ -1,7 +1,8 @@
 {
-    "name" : "Game-of-life",
-    "version" : "1.0",
+    "name" : "Game-of-Life",
+    "version" : "1.0.1",
     "description" : "Play Conway's Game of life on GitHub contribution board",
+    "browser_action": {},
     "icons": {
       "16": "icons/logo48.png",
       "48": "icons/logo128.png",

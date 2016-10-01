@@ -9,7 +9,7 @@
   var EMPTY_ROW = repeat(COL, 0).split('').map(function(n) { return +n })
 
   function repeat(times, str) {
-    if (str.repeat) str.repeat(times)
+    if (str.repeat) return str.repeat(times)
     return new Array(times + 1).join(str)
   }
 
@@ -22,16 +22,14 @@
   }
 
   function forEachList(list, childSelector, fn) {
-    var x, y
     if (typeof childSelector === 'function') {
-      fn = childSelector
-      for (x = 0; x < list.length; ++x) {
-          fn(x, list[x])
+      for (var i = 0; i < list.length; ++i) {
+          childSelector(i, list[i])
       }
     } else {
-      for (x = 0; x < list.length; ++x) {
+      for (var x = 0; x < list.length; ++x) {
         var sublist = list[x].querySelectorAll(childSelector)
-        for (y = 0; y < sublist.length; ++y) {
+        for (var y = 0; y < sublist.length; ++y) {
           fn(y, x, sublist[y])
         }
       }
@@ -86,13 +84,14 @@
   }
 
   function fillColor(cell, color) {
-    if (!cell) return null
-    if (isTagName('rect', cell)) {
-      return cell.getAttribute('fill')
+    if (cell) {
+      if (isTagName('rect', cell)) {
+        return cell.getAttribute('fill')
+      }
+      return color
+        ? (cell.style.backgroundColor = color)
+        : cell.style.backgroundColor
     }
-    return color
-      ? (cell.style.backgroundColor = color)
-      : cell.style.backgroundColor
   }
 
   function getKey(x, y) {

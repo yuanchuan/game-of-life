@@ -164,6 +164,15 @@
           })
         }, 600)
       },
+      fixAlignment: function() {
+        var head = document.querySelector('.js-calendar-graph-svg > g > g:first-child')
+        var mirror = board.querySelector('ul:nth-child(5)')
+        if (head && head.getBoundingClientRect) {
+          if (head.getBoundingClientRect().left > mirror.getBoundingClientRect().left) {
+            board.style.marginLeft = '1px'
+          }
+        }
+      },
       remove: function() {
         cells = {}
         if (board) {
@@ -316,6 +325,7 @@
     gc.appendChild(GameBoard.build())
     gc.appendChild(Controls.build())
 
+    GameBoard.fixAlignment()
     Game.reset()
     Controls
       .apply('hide', ['pause'])

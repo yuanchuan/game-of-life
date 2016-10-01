@@ -81,6 +81,7 @@
     line-height: 0;
     margin-left: 10px;
     vertical-align: middle;
+    vertical-align: text-top;
     border:none;
     background: none;
     color: #d6e685;
@@ -171,7 +172,7 @@
     display: inline-block;
     width: 4px;
     height: 4px;
-    margin: -1px 8px 0 0;
+    margin: -2px 8px 0 0;
     vertical-align: middle;
     color: #8cc665;
     box-shadow:

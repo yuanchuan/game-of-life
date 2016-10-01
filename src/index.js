@@ -168,7 +168,7 @@
         var head = document.querySelector('.js-calendar-graph-svg > g > g:first-child')
         var mirror = board.querySelector('ul:nth-child(5)')
         if (head && head.getBoundingClientRect) {
-          if (head.getBoundingClientRect().left > mirror.getBoundingClientRect().left) {
+          if (head.getBoundingClientRect().left - mirror.getBoundingClientRect().left > 1) {
             board.style.marginLeft = '1px'
           }
         }

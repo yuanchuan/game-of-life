@@ -165,12 +165,13 @@
         }, 600)
       },
       fixAlignment: function() {
+        var offset = function(el) {
+          return el && el.getBoundingClientRect().left
+        }
         var head = document.querySelector('.js-calendar-graph-svg > g > g:first-child')
         var mirror = board.querySelector('ul:nth-child(5)')
-        if (head && head.getBoundingClientRect) {
-          if (head.getBoundingClientRect().left - mirror.getBoundingClientRect().left > 1) {
-            board.style.marginLeft = '1px'
-          }
+        if (offset(head) - Math.ceil(offset(mirror)) == 1.5) {
+          board.style.marginLeft = '1px'
         }
       },
       remove: function() {

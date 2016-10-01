@@ -325,8 +325,8 @@
     gc.appendChild(GameBoard.build())
     gc.appendChild(Controls.build())
 
-    GameBoard.fixAlignment()
     Game.reset()
+    GameBoard.fixAlignment()
     Controls
       .apply('hide', ['pause'])
       .onclick = function(btn) {

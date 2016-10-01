@@ -23,8 +23,9 @@
 
   function forEachList(list, childSelector, fn) {
     if (typeof childSelector === 'function') {
+      fn = childSelector
       for (var i = 0; i < list.length; ++i) {
-          childSelector(i, list[i])
+        fn(i, list[i])
       }
     } else {
       for (var x = 0; x < list.length; ++x) {
@@ -48,10 +49,10 @@
   }
 
   function countNeighbors(board, x, y) {
-    var xa = x ? (x - 1) : (ROW - 1),
-      xc = (x == (ROW - 1)) ? 0 : (x + 1),
-      ya = y ? (y - 1) : (COL - 1),
-      yc = ( y == (COL - 1)) ? 0 : (y + 1)
+    var xa = x ? (x - 1) : (ROW - 1)
+    var ya = y ? (y - 1) : (COL - 1)
+    var xc = (x == (ROW - 1)) ? 0 : (x + 1)
+    var yc = (y == (COL - 1)) ? 0 : (y + 1)
     return (
       board[xa][ya] + board[x][ya] + board[xc][ya] +
       board[xa][y]  +              + board[xc][y]  +

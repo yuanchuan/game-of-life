@@ -202,8 +202,8 @@
       var neighbors = countNeighbors(board, x, y)
       var status = board[x][y]
       switch(status) {
+        case 0: if (neighbors === 3) status = 1; break
         case 1: if (neighbors <= 1 || neighbors >= 4) status = 0
-        case 0: if (neighbors === 3) status = 1
       }
       return status
     })
@@ -269,6 +269,7 @@
       '<ul>' + repeat(ROW, '<li></li>') + '</ul>'
     )
     function toggle(e) {
+      e.stopPropagation()
       var cell = e.target
       if (isTagName('li', cell)) {
         Canvas.ontoggle && Canvas.ontoggle(cell)

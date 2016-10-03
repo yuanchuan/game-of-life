@@ -8,14 +8,121 @@
   var CONTAINER = 'data-gol-container'
   var EMPTY_ROW = repeat(COL, 0).split('').map(function(n) { return +n })
 
+  /**
+   *  Bassed on the Run Length Encoded format:
+   *  http://conwaylife.com/wiki/RLE
+   */
+  var PATTERNS = {
+    "Gosper glider gun -- Bill Gosper 1970": rle(
+      36, 9, '24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8bo3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!'
+    ),
+    "Lightweight spaceship -- John Conway 1970": rle(
+      5, 4, 'bo2bo$o4b$o3bo$4o!'
+    ),
+    "Washerwoman -- Earl Abbe 1971": rle(
+      56, 5, 'o55b$2o4bo5bo5bo5bo5bo5bo5bo5bo5bob$3o2bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo$2o4bo5bo5bo5bo5bo5bo5bo5bo5bob$o!'
+    ),
+    "Ants -- Unknown": rle(
+      44, 4, '2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o2b$2b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o$2b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o$2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o!'
+    ),
+    "Glider -- Richard K. Guy 1970": rle(
+      3, 3, 'bob$2bo$3o!'
+    ),
+    "Bi-clock -- Dale Edwin Cole 1971": rle(
+      7, 7, '2bo4b$2o5b$2b2o3b$bo3bob$3b2o2b$5b2o$4bo!'
+    ),
+    "Beacon -- John Conway 1970": rle(
+      4, 4, '2o2b$o3b$3bo$2b2o!'
+    ),
+    "$rats -- David Buckingham 1972": rle(
+      12, 11, '5b2o5b$6bo5b$4bo7b$2obob4o3b$2obo5bobo$3bo2b3ob2o$3bo4bo3b$4b3obo3b$7bo4b$6bo5b$6b2o!'
+    ),
+    "Pinwheel -- Simon Norton 1970": rle(
+      12, 12, '6b2o4b$6b2o4b2$4b4o4b$2obo4bo3b$2obo2bobo3b$3bo3b2ob2o$3bobo2bob2o$4b4o4b2$4b2o6b$4b2o!'
+    ),
+    "Tumbler -- George Collins 1970": rle(
+      9, 5, 'bo5bob$obo3bobo$o2bobo2bo$2bo3bo2b$2b2ob2o!'
+    ),
+    "Bent keys -- Dean Hickerson 1989": rle(
+      12, 5, 'bo8bob$obo6bobo$bob2o2b2obob$4bo2bo4b$4bo2bo!'
+    ),
+    "Turning toads -- Dean Hickerson 1989": rle(
+      37, 8, '15bo6bo14b$14b2o5b2o6b2o6b$6b3obobob2obobob2obobo10b$2b2obo6bobo4bobo4bobo2bob2o2b$o2bobo3bo18b4obo2bo$2obobo27bob2o$3bo29bo3b$3b2o27b2o!'
+    ),
+    "38P7.2 -- Nicolay Beluchenko 2009": rle(
+      13, 11, '4bo3bo4b$o2bobobobo2bo$obo2bobo2bobo$bo2b2ob2o2bob$5bobo5b$2b2o5b2o2b$2bo7bo2b$4bo3bo4b2$bo2bo3bo2bob$2b2o5b2o!'
+    ),
+    "Blonker -- Nicolay Beluchenko 2004": rle(
+      12, 8, 'o2b2o4bo$2o2bob2obo$4bobo$5b2o$7bo$7bo3bo$9bobo$10bo!'
+    ),
+    "Dinner Table -- Robert Wainwright 1972": rle(
+      13, 13, 'bo11b$b3o7b2o$4bo6bob$3b2o4bobob$9b2o2b$6bo6b$4b2obo5b2$2bo3bo2bo3b$bob2o4bo3b$bo6bo4b$2o7b3ob$11bo!'
+    ),
+    "Octagon 2 -- Arthur Taber 1971": rle(
+      8, 8, '3b2o3b$2bo2bo2b$bo4bob$o6bo$o6bo$bo4bob$2bo2bo2b$3b2o!'
+    ),
+    "4-8-12 diamond --- Honeywell group 1971": rle(
+      12, 9, '4b4o4b2$2b8o2b2$12o2$2b8o2b2$4b4o!'
+    ),
+    "Worker bee -- David Buckingham 1972": rle(
+      16, 11, '2o12b2o$bo12bob$bobo8bobob$2b2o8b2o2b2$5b6o5b2$2b2o8b2o2b$bobo8bobob$bo12bob$2o12b2o!'
+    ),
+    "Blinker fuse -- Unknown": rle(
+      25, 5, '2o2bob2o17b$5obobo16b$8bob3ob3ob3ob3o$5obobo16b$2o2bob2o!'
+    ),
+    "Caterer -- Dean Hickerson 1989": rle(
+      8, 6, '2bo5b$o3b4o$o3bo3b$o7b$3bo4b$b2o!'
+    ),
+    "Pseudo-barberpole -- Achim Flammenkamp 1994": rle(
+      12, 12, '10b2o$11bo$9bo2b$7bobo2b2$5bobo4b2$3bobo6b2$2b2o8b$o11b$2o!'
+    ),
+    "Radial pseudo-barberpole -- Gabriel Nivasch": rle(
+      13, 13, '10b2ob$2o9bob$o8bo3b$2b2o3bobo3b2$3bobobo5b2$5bobobo3b2$3bobo3b2o2b$3bo8bo$bo9b2o$b2o!'
+    ),
+    "Cow -- Unknown": rle(
+      40, 7, '2o7b2o2b2o2b2o2b2o2b2o2b2o2b2o5b$2o4bob3o2b2o2b2o2b2o2b2o2b2o2b2o3b2o$4b2obo29bobo$4b2o3b29o2b$4b2obo30bob$2o4bob3o2b2o2b2o2b2o2b2o2b2o2b2o2b2ob$2o7b2o2b2o2b2o2b2o2b2o2b2o2b2o!'
+    )
+  }
+
   function repeat(times, str) {
     if (str.repeat) return str.repeat(times)
     return new Array(times + 1).join(str)
   }
 
-  function forEachIndex(fn) {
-    for (var x = 0; x < ROW; ++x) {
-      for (var y = 0; y < COL; ++y) {
+  function ignoreHeadArg(fn) {
+    return function() {
+      return fn.apply(null, [].slice.call(arguments, 1))
+    }
+  }
+
+  /**
+   *  Transform RLE format to a 2-dimensional array of 0 and 1s
+   */
+  function rle(x, y, pattern) {
+    return {
+      row: y,
+      col: x,
+      mapping: pattern
+        .replace(/(\d+)(\$)/g, ignoreHeadArg(repeat))
+        .split('$')
+        .map(function(line) {
+          var pat = line
+            .replace(/\!|\s+/g, '')
+            .replace(/(\d+)([bo])/g, ignoreHeadArg(repeat))
+          pat += repeat(x - pat.length, 'b')
+          return pat.split('').map(function(c) {
+            return c === 'b' ? 0 : 1
+          })
+        })
+    }
+  }
+
+  function forEachIndex(row, col, fn) {
+    if (typeof row === 'function') {
+      (fn = row, row = ROW, col = COL)
+    }
+    for (var x = 0; x < row; ++x) {
+      for (var y = 0; y < col; ++y) {
         fn(x, y)
       }
     }
@@ -48,15 +155,32 @@
     return board
   }
 
+  function createBoardByPattern(pattern) {
+    var board = createStatusBoard()
+    var row = pattern.row
+    var col = pattern.col
+    var startRow = Math.floor((ROW - row) / 2)
+    var startCol = Math.floor((COL - col) / 2)
+    forEachIndex(row, col, function(x, y) {
+      board[startRow + x][startCol + y] = pattern.mapping[x][y]
+    })
+    return board
+  }
+
   function countNeighbors(board, x, y) {
-    var xa = x ? (x - 1) : (ROW - 1)
-    var ya = y ? (y - 1) : (COL - 1)
-    var xc = (x == (ROW - 1)) ? 0 : (x + 1)
-    var yc = (y == (COL - 1)) ? 0 : (y + 1)
+    var x0 = (x > 0)
+    var xr = (x < ROW - 1)
+    var y0 = (y > 0)
+    var yr = (y < COL - 1)
     return (
-      board[xa][ya] + board[x][ya] + board[xc][ya] +
-      board[xa][y]  +              + board[xc][y]  +
-      board[xa][yc] + board[x][yc] + board[xc][yc]
+      ((x0 && y0) ? board[x - 1][y - 1] : 0) +
+      (y0         ? board[x][y - 1]     : 0) +
+      ((xr && y0) ? board[x + 1][y - 1] : 0) +
+      (x0         ? board[x - 1][y]     : 0) +
+      (xr         ? board[x + 1][y]     : 0) +
+      ((x0 && yr) ? board[x - 1][y + 1] : 0) +
+      (yr         ? board[x][y + 1]     : 0) +
+      ((xr && yr) ? board[x + 1][y + 1] : 0)
     )
   }
 
@@ -70,6 +194,20 @@
       }
       return status
     })
+  }
+
+  function generateBoxshadow() {
+    var pallette = ['#eeeeee', '#d6e685', '#8cc665', '#44a340']
+    var boxshadows = []
+    forEachIndex(5, 3, function(x, y) {
+      var color = pallette[Math.floor(Math.random() * pallette.length)]
+      boxshadows.push([
+        ((x + 1) * 4) + 'px',
+        ((y + 1) * 4) + 'px',
+        0, 0, color
+      ].join(' '))
+    })
+    return boxshadows.join(',')
   }
 
   function isTagName(name, el) {
@@ -109,17 +247,18 @@
     }
   }())
 
-  var GameBoard = (function() {
+  var Canvas = function() {
     var id = 'gol-contribution-board'
     var cells = {}
     var board = null
+    var animating = false
     var emptyCells = repeat(COL,
       '<ul>' + repeat(ROW, '<li></li>') + '</ul>'
     )
     function toggle(e) {
       var cell = e.target
       if (isTagName('li', cell)) {
-        GameBoard.ontoggle && GameBoard.ontoggle(cell)
+        Canvas.ontoggle && Canvas.ontoggle(cell)
       }
     }
     return {
@@ -136,12 +275,12 @@
         })
         return board
       },
-      render: function(statusBoard, colors) {
+      render: function(statusBoard, pallette) {
         forEachIndex(function(x, y) {
           var key = getKey(x, y)
           var status = statusBoard[x][y]
           fillColor(cells[key], status
-            ? (colors ? colors[key] : COLOR_ALIVE)
+            ? (pallette ? pallette[key] : COLOR_ALIVE)
             : COLOR_DEAD
           )
         })
@@ -149,7 +288,11 @@
       isEmpty: function() {
         return TOTAL === board.querySelectorAll('li[style$="238);"]').length
       },
+      animating: function() {
+        return animating
+      },
       animateBackground: function() {
+        animating = true
         var cells = board.querySelectorAll('li:not([style$="238);"])')
         forEachList(cells, function(_, cell) {
           setTransitonDelay(cell, (600 * Math.random()) + 'ms')
@@ -163,6 +306,7 @@
           forEachList(cells, function(_, cell) {
             setTransitonDelay(cell, '')
           })
+          animating = false
         }, 600)
       },
       fixAlignment: function() {
@@ -184,16 +328,19 @@
         }
       }
     }
-  }())
+  }()
 
-  var Controls = (function() {
+  var Controls = function() {
     var id = 'gol-controls'
     var controls = null
     var generation = null
     var buttons = {}
     var actions = ['run', 'pause', 'next', 'clear', 'reset', 'close']
     var content = '<span id="gol-generation">0</span>' + (
-      actions.map(function(name) { return '<a data-action="' + name + '"></a>' }).join('')
+      actions.map(function(name) {
+        var content = (name === 'reset' ? '<span id="gol-pattern-shadow"></span>' : '')
+        return '<a data-action="' + name + '">' + content + '</a>'
+      }).join('')
     )
     function action(e) {
       var btn = e.target
@@ -214,7 +361,7 @@
         controls.addEventListener('click', action)
         return controls
       },
-      apply: function(operation, names) {
+      apply: function(operation, names, value) {
         if (!Array.isArray(names)) names = [names]
         names.forEach(function(name) {
           var btn = buttons[name]
@@ -222,7 +369,9 @@
             case 'disable': btn.setAttribute('disabled', true); break
             case 'enable': btn.removeAttribute('disabled'); break
             case 'show': btn.style.display = ''; break
-            case 'hide': btn.style.display = 'none'
+            case 'hide': btn.style.display = 'none'; break
+            case 'setTitle': btn.title = value; break
+            case 'setShadow': btn.firstChild.style.boxShadow = value
           }
         })
         return this
@@ -240,7 +389,7 @@
         generation.innerHTML = count
       }
     }
-  }())
+  }()
 
   var Game = {
     generation: 0,
@@ -253,15 +402,31 @@
   Game._getIntialStatus = function() {
     var board = createStatusBoard()
     var gs = Game.container.querySelectorAll('.js-calendar-graph-svg > g > g')
-    var colors = {}
+    var pallette = {}
     forEachList(gs, 'rect', function(x, y, rect) {
       var color = fillColor(rect)
       var dx = x + 3, dy = y + 4
       board[dx][dy] = (color === COLOR_DEAD) ? 0 : 1
-      colors[getKey(dx, dy)] = color
+      pallette[getKey(dx, dy)] = color
     })
-    return { board: board, colors: colors }
+    return { board: board, pallette: pallette }
   }
+
+  Game._getNextPattern = function() {
+    var names = Object.keys(PATTERNS)
+    var max = names.length
+    var index = 0
+    return function() {
+      if (index >= max) {
+        index = 0
+      }
+      var name = names[index++]
+      return {
+        name: name,
+        pattern: PATTERNS[name]
+      }
+    }
+  }()
 
   Game._updateControls = function() {
     Game.running
@@ -274,7 +439,7 @@
         .apply('show', 'run')
         .apply('hide', 'pause')
         .apply(
-          (GameBoard.isEmpty() ? 'disable' : 'enable'),
+          (Canvas.isEmpty() ? 'disable' : 'enable'),
           ['run', 'next', 'clear']
         )
   }
@@ -324,11 +489,11 @@
   Game.play = function() {
     var gc = Game.container = document.querySelector('.js-calendar-graph').parentNode
     gc.setAttribute(CONTAINER, '')
-    gc.appendChild(GameBoard.build())
+    gc.appendChild(Canvas.build())
     gc.appendChild(Controls.build())
 
-    Game.reset()
-    GameBoard.fixAlignment()
+    Game.reset(true)
+    Canvas.fixAlignment()
     Controls
       .apply('hide', ['pause'])
       .onclick = function(btn) {
@@ -345,9 +510,9 @@
   }
 
   Game.next = function() {
-    GameBoard.render(Game.board = next(Game.board))
+    Canvas.render(Game.board = next(Game.board))
     Game._updateGeneration(++Game.generation)
-    if (GameBoard.isEmpty()) {
+    if (Canvas.isEmpty()) {
       Game._updateControls()
       return Game.pause()
     }
@@ -363,17 +528,29 @@
   }
 
   Game.clear = function() {
-    GameBoard.render(Game.board = createStatusBoard())
+    Canvas.render(Game.board = createStatusBoard())
     Game._updateGeneration(0)
     Game._updateControls()
+    Controls.apply('setTitle', 'reset', '')
   }
 
-  Game.reset = function() {
+  Game.reset = function(begin) {
+    if (Canvas.animating()) return false
     Game.pause()
-    var intial = Game._getIntialStatus()
-    GameBoard.render(Game.board = intial.board, intial.colors)
-    GameBoard.ontoggle = Game._ontoggle
-    GameBoard.animateBackground()
+    if (begin) {
+      var initial = Game._getIntialStatus()
+      Canvas.render(Game.board = initial.board, initial.pallette)
+    } else {
+      var pattern = Game._getNextPattern()
+      var board = createBoardByPattern(pattern.pattern)
+      Controls.apply('setTitle', 'reset', pattern.name)
+      Canvas.render(Game.board = board)
+    }
+
+    Controls.apply('setShadow', 'reset', generateBoxshadow())
+
+    Canvas.ontoggle = Game._ontoggle
+    Canvas.animateBackground()
     Game._updateGeneration(0)
     Game._updateControls()
   }
@@ -382,7 +559,7 @@
     if (Game.container) {
       Game.pause()
       Game.container.removeAttribute(CONTAINER)
-      GameBoard.remove()
+      Canvas.remove()
       Controls.remove()
       Game.container = null
     }

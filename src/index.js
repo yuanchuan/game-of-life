@@ -349,7 +349,7 @@
     var controls = null
     var generation = null
     var buttons = {}
-    var actions = ['run', 'pause', 'next', 'clear', 'reset', 'close']
+    var actions = ['reset', 'run', 'pause', 'next', 'clear', 'close']
     var content = '<span id="gol-generation">0</span>' + (
       actions.map(function(name) {
         var content = (name === 'reset' ? '<span id="gol-pattern-shadow"></span>' : '')

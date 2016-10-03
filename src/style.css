@@ -140,6 +140,7 @@
 
   #gol-controls a[data-action="reset"] {
       width: 2.5em;
+      background: rgba(192, 247, 155, 0.129412);
   }
     #gol-controls a[data-action="reset"]:after {
       content: '_';

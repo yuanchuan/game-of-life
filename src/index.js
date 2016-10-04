@@ -468,7 +468,7 @@
       var p = getPosition(cell.getAttribute('data-key'))
       var x = p.x, y = p.y
       var status = Game.board[x][y]
-      fillColor(cell, (status ? COLOR_ALIVE : COLOR_DEAD))
+      fillColor(cell, (status ? COLOR_DEAD : COLOR_ALIVE))
       Game.board[x][y] = (status ? 0 : 1)
       Game._updateGeneration(0)
       Game._updateControls()

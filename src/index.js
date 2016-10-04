@@ -9,7 +9,7 @@
   var EMPTY_ROW = repeat(COL, 0).split('').map(function(n) { return +n })
 
   /**
-   *  Bassed on the Run Length Encoded format:
+   *  Based on the `Run Length Encoded` format
    *  http://conwaylife.com/wiki/RLE
    */
   var PATTERNS = {
@@ -109,7 +109,7 @@
   }
 
   /**
-   *  Transform RLE format to a 2-dimensional array of 0 and 1s
+   *  Transform RLE format into a 2-dimensional array of 0 and 1s
    */
   function rle(x, y, pattern) {
     return {
@@ -172,10 +172,10 @@
     var board = createStatusBoard()
     var row = pattern.row
     var col = pattern.col
-    var startRow = Math.floor((ROW - row) / 2)
-    var startCol = Math.floor((COL - col) / 2)
+    var startx = Math.ceil((ROW - row) / 2)
+    var starty = Math.ceil((COL - col) / 2)
     forEachIndex(row, col, function(x, y) {
-      board[startRow + x][startCol + y] = pattern.mapping[x][y]
+      board[startx + x][starty + y] = pattern.mapping[x][y]
     })
     return board
   }
@@ -209,18 +209,18 @@
     })
   }
 
-  function generateBoxshadow() {
+  function randomBoxshadows() {
     var pallette = ['#eeeeee', '#d6e685', '#8cc665', '#44a340']
-    var boxshadows = []
+    var length = pallette.length
+    var shadows = []
     forEachIndex(5, 3, function(x, y) {
-      var color = pallette[Math.floor(Math.random() * pallette.length)]
-      boxshadows.push([
-        ((x + 1) * 4) + 'px',
-        ((y + 1) * 4) + 'px',
-        0, 0, color
+      shadows.push([
+        ((x + 1) << 2) + 'px',
+        ((y + 1) << 2) + 'px',
+        0, 0, pallette[Math.floor(Math.random() * length)]
       ].join(' '))
     })
-    return boxshadows.join(',')
+    return shadows.join(',')
   }
 
   function isTagName(name, el) {
@@ -250,7 +250,7 @@
     return x + '-' + y
   }
 
-  var getPosition = (function() {
+  var getPosition = function() {
     var position = {}
     forEachIndex(function(x, y) {
       position[getKey(x, y)] = { x: x, y: y }
@@ -258,12 +258,12 @@
     return function(key) {
       return position[key] || {}
     }
-  }())
+  }()
 
   var Canvas = function() {
     var id = 'gol-contribution-board'
     var cells = {}
-    var board = null
+    var canvas = null
     var animating = false
     var emptyCells = repeat(COL,
       '<ul>' + repeat(ROW, '<li></li>') + '</ul>'
@@ -277,22 +277,22 @@
     }
     return {
       build: function() {
-        if (board) return board
-        board = document.createElement('div')
-        board.id = id
-        board.innerHTML = emptyCells
-        board.addEventListener('click', toggle)
-        forEachList(board.querySelectorAll('ul'), 'li', function(x, y, elem) {
+        if (canvas) return canvas
+        canvas = document.createElement('div')
+        canvas.id = id
+        canvas.innerHTML = emptyCells
+        canvas.addEventListener('click', toggle)
+        forEachList(canvas.querySelectorAll('ul'), 'li', function(x, y, elem) {
           var key = getKey(x, y)
           cells[key] = elem
           elem.setAttribute('data-key', key)
         })
-        return board
+        return canvas
       },
-      render: function(statusBoard, pallette) {
+      render: function(board, pallette) {
         forEachIndex(function(x, y) {
           var key = getKey(x, y)
-          var status = statusBoard[x][y]
+          var status = board[x][y]
           fillColor(cells[key], status
             ? (pallette ? pallette[key] : COLOR_ALIVE)
             : COLOR_DEAD
@@ -300,14 +300,14 @@
         })
       },
       isEmpty: function() {
-        return TOTAL === board.querySelectorAll('li[style$="238);"]').length
+        return TOTAL === canvas.querySelectorAll('li[style$="238);"]').length
       },
       animating: function() {
         return animating
       },
       animateBackground: function() {
         animating = true
-        var cells = board.querySelectorAll('li:not([style$="238);"])')
+        var cells = canvas.querySelectorAll('li:not([style$="238);"])')
         forEachList(cells, function(_, cell) {
           setTransitonDelay(cell, (600 * Math.random()) + 'ms')
         })
@@ -328,17 +328,17 @@
           return el && el.getBoundingClientRect().left
         }
         var head = document.querySelector('.js-calendar-graph-svg > g > g:first-child')
-        var mirror = board.querySelector('ul:nth-child(5)')
+        var mirror = canvas.querySelector('ul:nth-child(5)')
         if (offset(head) - Math.ceil(offset(mirror)) == 1.5) {
-          board.style.marginLeft = '1px'
+          canvas.style.marginLeft = '1px'
         }
       },
       remove: function() {
         cells = {}
-        if (board) {
-          board.removeEventListener('click', toggle)
-          board.parentNode.removeChild(board)
-          board = null
+        if (canvas) {
+          canvas.removeEventListener('click', toggle)
+          canvas.parentNode.removeChild(canvas)
+          canvas = null
         }
       }
     }
@@ -361,6 +361,7 @@
       if (btn.hasAttribute('data-action') && !btn.hasAttribute('disabled')) {
         Controls.onclick && Controls.onclick(btn)
       }
+      return false
     }
     return {
       build: function() {
@@ -390,6 +391,9 @@
         })
         return this
       },
+      generation: function(count) {
+        generation.innerHTML = count
+      },
       remove: function() {
         buttons = {}
         if (controls) {
@@ -398,9 +402,6 @@
           generation = null
           controls = null
         }
-      },
-      generation: function(count) {
-        generation.innerHTML = count
       }
     }
   }()
@@ -463,45 +464,48 @@
   }
 
   Game._ontoggle = function(cell) {
-    if (Game.running) return false
-    var mapping = {
-      color: [COLOR_ALIVE, COLOR_DEAD], status: [1, 0]
+    if (!Game.running) {
+      var p = getPosition(cell.getAttribute('data-key'))
+      var x = p.x, y = p.y
+      var status = Game.board[x][y]
+      fillColor(cell, (status ? COLOR_ALIVE : COLOR_DEAD))
+      Game.board[x][y] = (status ? 0 : 1)
+      Game._updateGeneration(0)
+      Game._updateControls()
     }
-    var p = getPosition(cell.getAttribute('data-key'))
-    var status = Game.board[p.x][p.y]
-    fillColor(cell, mapping.color[status])
-    Game.board[p.x][p.y] = mapping.status[status]
-    Game._updateGeneration(0)
-    Game._updateControls()
   }
 
   Game._loop = function() {
-    if (!Game.running) return false
-    Game.next()
-    Game.timer = setTimeout(function() {
-      Game._loop()
-    }, 80)
+    if (Game.running) {
+      Game.next()
+      Game.timer = setTimeout(function() {
+        Game._loop()
+      }, 80)
+    }
   }
 
   Game.init = function() {
     var graph = document.querySelector('.js-contribution-graph')
-    if (!graph) return false
     var id = 'gol-button-play'
-    if (document.getElementById(id)) return false
-    var play = document.createElement('a')
-    play.id = id
-    play.title = "Play Conway's Game of Life"
-    play.innerHTML = 'Play'
-    play.addEventListener('click', function(e) {
-      e.preventDefault()
-      Game.play()
-    })
-    var legend = document.querySelector('.contrib-legend')
-    legend.insertBefore(play, legend.firstChild)
+    if (graph && !document.getElementById(id)) {
+      var play = document.createElement('a')
+      var legend = document.querySelector('.contrib-legend')
+      play.id = id
+      play.title = "Play Conway's Game of Life"
+      play.innerHTML = 'Play'
+      play.addEventListener('click', function(e) {
+        Game.play()
+        return false
+      })
+      if (legend) {
+        legend.insertBefore(play, legend.firstChild)
+      }
+    }
   }
 
   Game.play = function() {
-    var gc = Game.container = document.querySelector('.js-calendar-graph').parentNode
+    var gc = Game.container =
+      document.querySelector('.js-calendar-graph').parentNode
     gc.setAttribute(CONTAINER, '')
     gc.appendChild(Canvas.build())
     gc.appendChild(Controls.build())
@@ -509,7 +513,7 @@
     Game.reset(true)
     Canvas.fixAlignment()
     Controls
-      .apply('hide', ['pause'])
+      .apply('hide', 'pause')
       .onclick = function(btn) {
         var action = Game[btn.getAttribute('data-action')]
         action && action()
@@ -537,8 +541,8 @@
     Game.running = false
     if (Game.container) {
       Game.container.setAttribute(CONTAINER, '')
+      Game._updateControls()
     }
-    Game._updateControls()
   }
 
   Game.clear = function() {
@@ -551,18 +555,21 @@
   Game.reset = function(begin) {
     if (Canvas.animating()) return false
     Game.pause()
+
     if (begin) {
       var initial = Game._getIntialStatus()
-      Canvas.render(Game.board = initial.board, initial.pallette)
+      Canvas.render(
+        Game.board = initial.board,
+        initial.pallette
+      )
     } else {
-      var pattern = Game._getNextPattern()
-      var board = createBoardByPattern(pattern.pattern)
-      Controls.apply('setTitle', 'reset', pattern.name)
+      var nextPattern = Game._getNextPattern()
+      var board = createBoardByPattern(nextPattern.pattern)
+      Controls.apply('setTitle', 'reset', nextPattern.name)
       Canvas.render(Game.board = board)
     }
 
-    Controls.apply('setShadow', 'reset', generateBoxshadow())
-
+    Controls.apply('setShadow', 'reset', randomBoxshadows())
     Canvas.ontoggle = Game._ontoggle
     Canvas.animateBackground()
     Game._updateGeneration(0)

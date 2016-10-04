@@ -166,7 +166,8 @@
       background: rgba(103, 115, 103, 0.52);
       color: #fff;
     }
-    [data-gol-container=""] #gol-controls a[title]:not([title=""])[data-action="reset"]:hover:before {
+    [data-gol-container=""]
+    #gol-controls a[title]:not([title=""])[data-action="reset"]:hover:before {
       transform: translate(-50%, 0);
       opacity: 1;
       z-index: 9;

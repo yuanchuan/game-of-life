@@ -14,8 +14,11 @@
    */
   var PATTERNS = {
     "Gosper glider gun -- Bill Gosper 1970": rle(
-      36, 9, '24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8b\
-              o3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!'
+      36, 9,  '24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8b\
+               o3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!'
+    ),
+    "Queen bee shuttle -- Bill Gosper 1970": rle(
+      22, 7,  '9bo12b$7bobo12b$6bobo13b$2o3bo2bo11b2o$2o4bobo11b2o$7bobo12b$9bo!'
     ),
     "Lightweight spaceship -- John Conway 1970": rle(
       5, 4,   'bo2bo$o4b$o3bo$4o!'
@@ -29,28 +32,22 @@
                3b2o$2b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o$2o3b2o3b2o3b2o3b2o3b2o3b2o3b\
                2o3b2o!'
     ),
-    "Glider -- Richard K. Guy 1970": rle(
-      3, 3,   'bob$2bo$3o!'
-    ),
     "Bi-clock -- Dale Edwin Cole 1971": rle(
       7, 7,   '2bo4b$2o5b$2b2o3b$bo3bob$3b2o2b$5b2o$4bo!'
     ),
-    "Beacon -- John Conway 1970": rle(
-      4, 4,   '2o2b$o3b$3bo$2b2o!'
-    ),
-    "$rats -- David Buckingham 1972": rle(
-      12, 11, '5b2o5b$6bo5b$4bo7b$2obob4o3b$2obo5bobo$3bo2b3ob2o$3bo4bo3b$4b3obo3b$7b\
-               o4b$6bo5b$6b2o!'
+    "4-8-12 diamond --- Honeywell group 1971": rle(
+      12, 9,  '4b4o4b2$2b8o2b2$12o2$2b8o2b2$4b4o!'
     ),
     "Pinwheel -- Simon Norton 1970": rle(
       12, 12, '6b2o4b$6b2o4b2$4b4o4b$2obo4bo3b$2obo2bobo3b$3bo3b2ob2o$3bobo2bob2o$4b\
                4o4b2$4b2o6b$4b2o!'
     ),
+    "Dinner Table -- Robert Wainwright 1972": rle(
+      13, 13, 'bo11b$b3o7b2o$4bo6bob$3b2o4bobob$9b2o2b$6bo6b$4b2obo5b2$2bo3bo2bo3b$bo\
+               b2o4bo3b$bo6bo4b$2o7b3ob$11bo!'
+    ),
     "Tumbler -- George Collins 1970": rle(
       9, 5,   'bo5bob$obo3bobo$o2bobo2bo$2bo3bo2b$2b2ob2o!'
-    ),
-    "Bent keys -- Dean Hickerson 1989": rle(
-      12, 5,  'bo8bob$obo6bobo$bob2o2b2obob$4bo2bo4b$4bo2bo!'
     ),
     "Turning toads -- Dean Hickerson 1989": rle(
       37, 8,  '15bo6bo14b$14b2o5b2o6b2o6b$6b3obobob2obobob2obobo10b$2b2obo6bobo4bobo\
@@ -63,30 +60,16 @@
     "Blonker -- Nicolay Beluchenko 2004": rle(
       12, 8,  'o2b2o4bo$2o2bob2obo$4bobo$5b2o$7bo$7bo3bo$9bobo$10bo!'
     ),
-    "Dinner Table -- Robert Wainwright 1972": rle(
-      13, 13, 'bo11b$b3o7b2o$4bo6bob$3b2o4bobob$9b2o2b$6bo6b$4b2obo5b2$2bo3bo2bo3b$bo\
-               b2o4bo3b$bo6bo4b$2o7b3ob$11bo!'
-    ),
     "Octagon 2 -- Arthur Taber 1971": rle(
       8, 8,   '3b2o3b$2bo2bo2b$bo4bob$o6bo$o6bo$bo4bob$2bo2bo2b$3b2o!'
     ),
-    "4-8-12 diamond --- Honeywell group 1971": rle(
-      12, 9,  '4b4o4b2$2b8o2b2$12o2$2b8o2b2$4b4o!'
+    "Pentadecathlon -- John Conway 1970": rle(
+      10, 3,  '2bo4bo2b$2ob4ob2o$2bo4bo!'
     ),
-    "Worker bee -- David Buckingham 1972": rle(
-      16, 11, '2o12b2o$bo12bob$bobo8bobob$2b2o8b2o2b2$5b6o5b2$2b2o8b2o2b$bobo8bobob$b\
-               o12bob$2o12b2o!'
+    "Pentapole -- Unknown 1970": rle(
+      8, 8,   '2o6b$obo5b2$2bobo3b2$4bobob$7bo$6b2o!'
     ),
-    "Blinker fuse -- Unknown": rle(
-      25, 5,  '2o2bob2o17b$5obobo16b$8bob3ob3ob3ob3o$5obobo16b$2o2bob2o!'
-    ),
-    "Caterer -- Dean Hickerson 1989": rle(
-      8, 6,   '2bo5b$o3b4o$o3bo3b$o7b$3bo4b$b2o!'
-    ),
-    "Pseudo-barberpole -- Achim Flammenkamp 1994": rle(
-      12, 12, '10b2o$11bo$9bo2b$7bobo2b2$5bobo4b2$3bobo6b2$2b2o8b$o11b$2o!'
-    ),
-    "Radial pseudo-barberpole -- Gabriel Nivasch": rle(
+    "Radial pseudo-barberpole -- Gabriel Nivasch 1994": rle(
       13, 13, '10b2ob$2o9bob$o8bo3b$2b2o3bobo3b2$3bobobo5b2$5bobobo3b2$3bobo3b2o2b$3b\
                o8bo$bo9b2o$b2o!'
     ),
@@ -94,6 +77,25 @@
       40, 7,  '2o7b2o2b2o2b2o2b2o2b2o2b2o2b2o5b$2o4bob3o2b2o2b2o2b2o2b2o2b2o2b2o3b2o$\
                4b2obo29bobo$4b2o3b29o2b$4b2obo30bob$2o4bob3o2b2o2b2o2b2o2b2o2b2o2b2o\
                2b2ob$2o7b2o2b2o2b2o2b2o2b2o2b2o2b2o!'
+    ),
+    "Ellison p4 HW emulator -- Scot Ellison 2010": rle(
+      24, 9,  '11b2o11b$4bo3bo6bo3bo4b$3bobo12bobo3b$3bobo12bobo3b$2obobob10obobob2o$\
+               2obo16bob2o$3bo16bo3b$3bobo4b2obo4bobo3b$4b2o4bob2o4b2o!'
+    ),
+    "Swine -- Scot Ellison 2011": rle(
+      37, 10, '33bo$9bo2b2o7bo10bobo$o2b2o2bobobo5bo3bo7bo2b2o$o10bo2bobo3bo4bo2bobob\
+               2ob2o$o3bo4bo4b2obobo2bob2obo4b2o$3b2o4bob2obo2bobob2o4bo4bo3bo$2ob2ob\
+               obo2bo4bo3bobo2bo10bo$3b2o2bo7bo3bo5bobobo2b2o2bo$2bobo10bo7b2o2bo$3bo!'
+    ),
+    "Caterer on figure eight -- Unknown": rle(
+      18, 6,  '4b2o6bo5b$2bob2o4bo3b4o$bo8bo3bo3b$4bo5bo7b$2obo9bo4b$2o9b2o!'
+    ),
+    "Almosymmetric -- Unknown 1971": rle(
+      9, 8,   '4bo4b$2o2bobo2b$obo6b$7b2o$bo7b$o6bob$2obobo3b$5bo!'
+    ),
+    "Carnival shuttle -- Robert Wainwright 1984": rle(
+      38, 7,  '33bo3bo$2o3b2o26b5o$bobobo3bo2bo6b2o3bo2bo7bo2b$b2ob2o2b2o3b2o4b2o2b2o\
+               3b2o4bobob$bobobo3bo2bo6b2o3bo2bo7bo2b$2o3b2o26b5o$33bo3bo!'
     )
   }
 

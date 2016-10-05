@@ -87,6 +87,7 @@
     color: #d6e685;
     font-size: 0;
     transition: all .2s ease;
+    transition-delay: .2s;
   }
   #gol-controls a[data-action="close"]:hover {
     transform: rotate(90deg);

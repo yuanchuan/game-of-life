@@ -212,7 +212,7 @@
   }
 
   function randomBoxshadows() {
-    var pallette = ['#eeeeee', '#d6e685', '#8cc665', '#44a340']
+    var pallette = [COLOR_DEAD, COLOR_ALIVE]
     var length = pallette.length
     var shadows = []
     forEachIndex(5, 3, function(x, y) {
@@ -516,6 +516,7 @@
     Canvas.fixAlignment()
     Controls
       .apply('hide', 'pause')
+      .apply('setTitle', 'reset', 'select pattern')
       .onclick = function(btn) {
         var action = Game[btn.getAttribute('data-action')]
         action && action()
@@ -551,7 +552,7 @@
     Canvas.render(Game.board = createStatusBoard())
     Game._updateGeneration(0)
     Game._updateControls()
-    Controls.apply('setTitle', 'reset', '')
+    Controls.apply('setTitle', 'reset', 'select pattern')
   }
 
   Game.reset = function(begin) {

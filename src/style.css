@@ -86,6 +86,10 @@
     background: none;
     color: #d6e685;
     font-size: 0;
+    transition: all .2s ease;
+  }
+  #gol-controls a[data-action="close"]:hover {
+    transform: rotate(90deg);
   }
     #gol-controls a[data-action="close"]:before,
     #gol-controls a[data-action="close"]:after {
@@ -140,7 +144,7 @@
 
   #gol-controls a[data-action="reset"] {
       width: 2.5em;
-      background: rgba(192, 247, 155, 0.129412);
+      background: #fff;
   }
     #gol-controls a[data-action="reset"]:after {
       content: '_';
@@ -153,9 +157,7 @@
       white-space: nowrap;
       left: 50%;
       bottom: 100%;
-      transition: all .2s ease;
-      transition-delay: .1s;
-      transform: translate(-50%, 3px);
+      transform: translate(-50%, -5px);
       opacity: 0;
       z-index: -1;
       min-width: 8em;
@@ -163,7 +165,7 @@
       border-radius: 2px;
       padding: 4px 8px;
       text-algin: center;
-      background: rgba(103, 115, 103, 0.52);
+      background: rgba(57, 82, 54, 0.43);
       color: #fff;
     }
     [data-gol-container=""]
@@ -171,6 +173,10 @@
       transform: translate(-50%, 0);
       opacity: 1;
       z-index: 9;
+      transition:
+        transform .3s ease,
+        opacity .2s ease;
+      transition-delay: .2s;
     }
 
 

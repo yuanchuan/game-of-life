@@ -622,10 +622,10 @@
         || document.getElementById('gol-button-play')) {
         detectPjaxEnd(fn, --attempt)
       } else {
-          setTimeout(function() {
-            isDetecting = false
-            fn()
-          }, 500)
+        setTimeout(function() {
+          isDetecting = false
+          fn()
+        }, 500)
       }
     }, 500)
   }

@@ -35,7 +35,7 @@
     "Bi-clock -- Dale Edwin Cole 1971": rle(
       7, 7,   '2bo4b$2o5b$2b2o3b$bo3bob$3b2o2b$5b2o$4bo!'
     ),
-    "4-8-12 diamond --- Honeywell group 1971": rle(
+    "4-8-12 diamond -- Honeywell group 1971": rle(
       12, 9,  '4b4o4b2$2b8o2b2$12o2$2b8o2b2$4b4o!'
     ),
     "Pinwheel -- Simon Norton 1970": rle(
@@ -203,7 +203,7 @@
     return createStatusBoard(function(x, y) {
       var neighbors = countNeighbors(board, x, y)
       var status = board[x][y]
-      switch(status) {
+      switch (status) {
         case 0: if (neighbors === 3) status = 1; break
         case 1: if (neighbors <= 1 || neighbors >= 4) status = 0
       }

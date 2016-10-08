@@ -371,7 +371,7 @@
         controls = document.createElement('div')
         controls.id = id
         controls.innerHTML = content
-        generation = controls.querySelector('#gol-generation')
+        generation = document.getElementById('gol-generation')
         actions.forEach(function(name) {
           buttons[name] = controls.querySelector('[data-action="' + name + '"]')
         })
@@ -591,8 +591,8 @@
 
   Game.init()
 
-  var container = document.querySelector('#js-pjax-container')
-  var loaderBar = document.querySelector('#js-pjax-loader-bar')
+  var container = document.getElementById('js-pjax-container')
+  var loaderBar = document.getElementById('js-pjax-loader-bar')
   var maxAttempt = 100
   var isDetecting = false
 

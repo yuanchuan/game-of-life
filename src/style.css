@@ -74,23 +74,24 @@
       content: attr(data-action);
     }
 
+  @keyframes rotating {
+    from { transform: rotate(45deg); }
+    to { transform: rotate(0) }
+  }
   #gol-controls a[data-action="close"] {
     position: relative;
     width: 20px;
     height: 20px;
     line-height: 0;
     margin-left: 10px;
-    vertical-align: middle;
     vertical-align: text-top;
     border:none;
     background: none;
     color: #d6e685;
     font-size: 0;
-    transition: all .2s ease;
-    transition-delay: .2s;
-  }
-  #gol-controls a[data-action="close"]:hover {
-    transform: rotate(90deg);
+    animation: rotating .2s ease;
+    -webkit-transfom-origin: 50% 50%;
+            transfom-origin: 50% 50%;
   }
     #gol-controls a[data-action="close"]:before,
     #gol-controls a[data-action="close"]:after {
@@ -101,8 +102,8 @@
       width: 61.8%;
       height: 1px;
       background: #bfd06b;
-      -webkit-transfom-origin 50% 50%;
-              transfom-origin 50% 50%;
+      -webkit-transfom-origin: 50% 50%;
+              transfom-origin: 50% 50%;
     }
     #gol-controls a[data-action="close"]:before {
       -webkit-transform: translate(-50%, 0) rotate(-45deg);

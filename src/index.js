@@ -394,7 +394,9 @@
         return this
       },
       generation: function(count) {
-        generation.innerHTML = count
+        if (generation) {
+          generation.innerHTML = count
+        }
       },
       remove: function() {
         buttons = {}

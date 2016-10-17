@@ -1,7 +1,7 @@
 # Game of Life
 > A browser extension to play [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) on GitHub contribution board.
 
-![alt](screencast/demo2.gif)
+![alt](screencast/demo3.gif)
 
 ## How to play
 

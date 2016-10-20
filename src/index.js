@@ -371,7 +371,6 @@
         controls = document.createElement('div')
         controls.id = id
         controls.innerHTML = content
-        generation = document.getElementById('gol-generation')
         actions.forEach(function(name) {
           buttons[name] = controls.querySelector('[data-action="' + name + '"]')
         })
@@ -394,6 +393,9 @@
         return this
       },
       generation: function(count) {
+        if (!generation) {
+          generation = document.getElementById('gol-generation')
+        }
         if (generation) {
           generation.innerHTML = count
         }

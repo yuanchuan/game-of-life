@@ -1,7 +1,7 @@
 (function() {
 
   var ROW = 13
-  var COL = 60
+  var COL = 61
   var TOTAL = ROW * COL
   var COLOR_DEAD = '#eeeeee'
   var COLOR_ALIVE = '#8cc665'
@@ -100,8 +100,8 @@
   }
 
   function repeat(times, str) {
-    if (str.repeat) return str.repeat(times)
-    return new Array(times + 1).join(str)
+    if (str.repeat) return str.repeat(+times)
+    return new Array(+times + 1).join(str)
   }
 
   function ignoreHeadArg(fn) {
@@ -325,16 +325,6 @@
           animating = false
         }, 600)
       },
-      fixAlignment: function() {
-        var offset = function(el) {
-          return el && el.getBoundingClientRect().left
-        }
-        var head = document.querySelector('.js-calendar-graph-svg > g > g:first-child')
-        var mirror = canvas.querySelector('ul:nth-child(5)')
-        if (offset(head) - Math.ceil(offset(mirror)) == 1.5) {
-          canvas.style.marginLeft = '1px'
-        }
-      },
       remove: function() {
         cells = {}
         if (canvas) {
@@ -426,7 +416,7 @@
     var pallette = {}
     forEachList(gs, 'rect', function(x, y, rect) {
       var color = fillColor(rect)
-      var dx = x + 3, dy = y + 4
+      var dx = x + 3, dy = y + 5
       board[dx][dy] = (color === COLOR_DEAD) ? 0 : 1
       pallette[getKey(dx, dy)] = color
     })
@@ -517,7 +507,6 @@
     gc.appendChild(Controls.build())
 
     Game.reset(true)
-    Canvas.fixAlignment()
     Controls
       .apply('hide', 'pause')
       .apply('setTitle', 'reset', 'select pattern')

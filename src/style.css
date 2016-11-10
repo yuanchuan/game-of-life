@@ -20,9 +20,9 @@
 
 #gol-contribution-board {
   position: absolute;
-  left: 2px;
-  top: 0;
-  width: 100%;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 4px);
   height: 100%;
   background: #fff;
 }
@@ -89,7 +89,8 @@
     background: none;
     color: #d6e685;
     font-size: 0;
-    animation: rotating .2s ease;
+    -webkit-animation: rotating .2s ease;
+            animation: rotating .2s ease;
     -webkit-transfom-origin: 50% 50%;
             transfom-origin: 50% 50%;
   }

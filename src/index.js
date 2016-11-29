@@ -325,6 +325,17 @@
           animating = false
         }, 600)
       },
+      fixAlignment: function() {
+        var offset = function(el) {
+          return el && el.getBoundingClientRect().left
+        }
+        var head = document.querySelector('.js-calendar-graph-svg > g > g:first-child')
+        var mirror = canvas.querySelector('ul:nth-child(6)')
+
+        if (offset(head) - offset(mirror) == 0.5) {
+          canvas.style.marginLeft = '-.5px'
+        }
+      },
       remove: function() {
         cells = {}
         if (canvas) {
@@ -507,6 +518,7 @@
     gc.appendChild(Controls.build())
 
     Game.reset(true)
+    Canvas.fixAlignment();
     Controls
       .apply('hide', 'pause')
       .apply('setTitle', 'reset', 'select pattern')

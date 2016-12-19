@@ -42,9 +42,9 @@
       12, 12, '6b2o4b$6b2o4b2$4b4o4b$2obo4bo3b$2obo2bobo3b$3bo3b2ob2o$3bobo2bob2o$4b\
                4o4b2$4b2o6b$4b2o!'
     ),
-    "Dinner Table -- Robert Wainwright 1972": rle(
-      13, 13, 'bo11b$b3o7b2o$4bo6bob$3b2o4bobob$9b2o2b$6bo6b$4b2obo5b2$2bo3bo2bo3b$bo\
-               b2o4bo3b$bo6bo4b$2o7b3ob$11bo!'
+    "Radial pseudo-barberpole -- Gabriel Nivasch 1994": rle(
+      13, 13, '10b2ob$2o9bob$o8bo3b$2b2o3bobo3b2$3bobobo5b2$5bobobo3b2$3bobo3b2o2b$3b\
+               o8bo$bo9b2o$b2o!'
     ),
     "Tumbler -- George Collins 1970": rle(
       9, 5,   'bo5bob$obo3bobo$o2bobo2bo$2bo3bo2b$2b2ob2o!'
@@ -63,15 +63,14 @@
     "Octagon 2 -- Arthur Taber 1971": rle(
       8, 8,   '3b2o3b$2bo2bo2b$bo4bob$o6bo$o6bo$bo4bob$2bo2bo2b$3b2o!'
     ),
+    "Star -- Hartmut Holzwart 1993": rle(
+      11, 11, '4b3o4b2$2bobobobo2b2$obo5bobo$o9bo$obo5bobo2$2bobobobo2b2$4b3o!'
+    ),
     "Pentadecathlon -- John Conway 1970": rle(
       10, 3,  '2bo4bo2b$2ob4ob2o$2bo4bo!'
     ),
     "Pentapole -- Unknown 1970": rle(
       8, 8,   '2o6b$obo5b2$2bobo3b2$4bobob$7bo$6b2o!'
-    ),
-    "Radial pseudo-barberpole -- Gabriel Nivasch 1994": rle(
-      13, 13, '10b2ob$2o9bob$o8bo3b$2b2o3bobo3b2$3bobobo5b2$5bobobo3b2$3bobo3b2o2b$3b\
-               o8bo$bo9b2o$b2o!'
     ),
     "Cow -- Unknown": rle(
       40, 7,  '2o7b2o2b2o2b2o2b2o2b2o2b2o2b2o5b$2o4bob3o2b2o2b2o2b2o2b2o2b2o2b2o3b2o$\
@@ -92,6 +91,10 @@
     ),
     "Almosymmetric -- Unknown 1971": rle(
       9, 8,   '4bo4b$2o2bobo2b$obo6b$7b2o$bo7b$o6bob$2obobo3b$5bo!'
+    ),
+    "Circle of fire -- Unknown": rle(
+      11, 11, '4bobo$2bo2bo2bo$3bobobo$b3obob3o$5bo$5ob5o$5bo$b3obob3o$3bobobo$2bo2\
+               bo2bo$4bobo!'
     ),
     "Carnival shuttle -- Robert Wainwright 1984": rle(
       38, 7,  '33bo3bo$2o3b2o26b5o$bobobo3bo2bo6b2o3bo2bo7bo2b$b2ob2o2b2o3b2o4b2o2b2o\

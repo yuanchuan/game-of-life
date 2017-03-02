@@ -3,7 +3,7 @@
   var ROW = 13
   var COL = 61
   var TOTAL = ROW * COL
-  var COLOR_DEAD = '#eeeeee'
+  var COLOR_DEAD = '#ebedf0'
   var COLOR_ALIVE = '#8cc665'
   var CONTAINER = 'data-gol-container'
   var EMPTY_ROW = repeat(COL, 0).split('').map(function(n) { return +n })
@@ -305,14 +305,14 @@
         })
       },
       isEmpty: function() {
-        return TOTAL === canvas.querySelectorAll('li[style$="238);"]').length
+        return TOTAL === canvas.querySelectorAll('li[style$="240);"]').length
       },
       animating: function() {
         return animating
       },
       animateBackground: function() {
         animating = true
-        var cells = canvas.querySelectorAll('li:not([style$="238);"])')
+        var cells = canvas.querySelectorAll('li:not([style$="240);"])')
         forEachList(cells, function(_, cell) {
           setTransitonDelay(cell, (600 * Math.random()) + 'ms')
         })

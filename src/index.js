@@ -375,6 +375,7 @@
         controls = document.createElement('div')
         controls.id = id
         controls.innerHTML = content
+        controls.style.setProperty('--color', COLOR_ALIVE);
         actions.forEach(function(name) {
           buttons[name] = controls.querySelector('[data-action="' + name + '"]')
         })
@@ -500,6 +501,8 @@
     if (graph && !document.getElementById(id)) {
       var play = document.createElement('a')
       var legend = document.querySelector('.contrib-legend')
+      COLOR_ALIVE = getComputedStyle(legend.querySelector('.legend li:nth-child(3)')).backgroundColor
+      play.style.setProperty('--color', COLOR_ALIVE);
       play.id = id
       play.title = "Play Conway's Game of Life"
       play.innerHTML = 'Play'

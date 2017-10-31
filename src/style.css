@@ -64,9 +64,9 @@
     margin: 0 2px;
     transition: all .2s ease;
     font-size: .8em;
-    color: rgba(140, 198, 101, .8);
     text-decoration: none;
-    border: 1px solid rgba(140, 198, 101, .3);
+    color: var(--color, #8cc665);
+    box-shadow: currentColor 0px 0px 0px .65px;
     border-radius: 2px;
     cursor: pointer;
   }
@@ -86,8 +86,10 @@
     margin-left: 10px;
     vertical-align: text-top;
     border:none;
+    box-shadow: none;
     background: none;
-    color: #d6e685;
+    color: var(--color, #8cc665);
+    opacity: .7;
     font-size: 0;
     -webkit-animation: rotating .2s ease;
             animation: rotating .2s ease;
@@ -102,7 +104,7 @@
       top: 50%;
       width: 61.8%;
       height: 1px;
-      background: #bfd06b;
+      background: currentColor;
       -webkit-transfom-origin: 50% 50%;
               transfom-origin: 50% 50%;
     }
@@ -114,20 +116,28 @@
       -webkit-transform: translate(-50%, 0) rotate(45deg);
               transform: translate(-50%, 0) rotate(45deg);
     }
-    #gol-controls a[data-action="close"]:hover:before,
-    #gol-controls a[data-action="close"]:hover:after {
-      background-color: #d0b96b;
+    #gol-controls a[data-action="close"]:hover {
+      opacity: 1;
     }
 
   #gol-controls a[data-action="run"] {
-    border-color: rgba(140, 198, 101, 0.7);
-    background-color: rgba(192, 247, 155, .13);
+    position: relative;
   }
   #gol-controls a[data-action="pause"] {
-    background-color: rgba(214, 230, 133, .18);
-    border-color: #d6e685;
-    color: #9bb517;
+    box-shadow: currentColor 0px 0px 0px 1px;
   }
+    #gol-controls a[data-action="run"]:before,
+    #gol-controls a[data-action="pause"]:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0; bottom: 0; left: 0; right: 0;
+      background: currentColor;
+      opacity: .1;
+    }
+    #gol-controls a[data-action="pause"]:before {
+      opacity: .15;
+    }
   #gol-controls a[disabled] {
     background: transparent;
     border-color: rgba(160, 165, 157, .69);;
@@ -135,14 +145,14 @@
     opacity: .5;
     cursor: default;
   }
-  #gol-controls a[data-action="run"]:not([disabled]):hover {
-    background-color: rgba(237, 255, 200, .35);
+  #gol-controls a[data-action="run"]:not([disabled]):hover:before {
+    opacity: .15;
   }
   #gol-controls a[data-action="next"]:not([disabled]):hover,
   #gol-controls a[data-action="clear"]:not([disabled]):hover,
   #gol-controls a[data-action="reset"]:not([disabled]):hover {
-    border-color: rgba(140, 198, 101, 0.7);
-    color: #8cc665;
+    color: var(--color, #8cc665);
+    box-shadow: currentColor 0px 0px 0px 1px;
   }
 
   #gol-controls a[data-action="reset"] {
@@ -160,7 +170,7 @@
       white-space: nowrap;
       left: 50%;
       bottom: 100%;
-      transform: translate(-50%, -5px);
+      transform: translate(-50%, -2px);
       opacity: 0;
       z-index: -1;
       min-width: 8em;
@@ -168,7 +178,7 @@
       border-radius: 2px;
       padding: 4px 8px;
       text-algin: center;
-      background: rgba(57, 82, 54, 0.43);
+      background: rgba(0, 0, 0, .4);
       color: #fff;
     }
     [data-gol-container=""]
@@ -176,9 +186,10 @@
       transform: translate(-50%, 0);
       opacity: 1;
       z-index: 9;
+      will-change: transform;
       transition:
-        transform .3s ease,
-        opacity .2s ease;
+        transform .3s cubic-bezier(0.19, 1, 0.22, 1),
+        opacity .2s cubic-bezier(0.19, 1, 0.22, 1);
       transition-delay: .2s;
     }
 
@@ -209,16 +220,16 @@
 #gol-button-play {
   float: left;
   margin-right: 1em;
-  padding: 0 5px 0 9px;
+  padding: 1px 5px 1px 9px;
   vertical-align: middle;
   transition: all .2s ease;
-  color: #8cc665;
-  box-shadow: rgba(140, 198, 101, .25) 0px 0px 0px 1px;
+  color: var(--color, #8cc665);
+  box-shadow: currentColor 0px 0px 0px .65px;
   border-radius: 2px;
   cursor: pointer;
 }
 #gol-button-play:hover {
-  box-shadow: rgba(140, 198, 101, .69) 0px 0px 0px 1px;
+  box-shadow: currentColor 0px 0px 0px 1px;
   text-decoration: none;
 }
   #gol-button-play:before {
@@ -228,11 +239,11 @@
     height: 4px;
     margin: -2px 8px 0 0;
     vertical-align: middle;
-    color: #8cc665;
+    color: currentColor;
     box-shadow:
-      0 -4px #8cc665,
-      4px 0 #8cc665,
-      -4px 4px #8cc665,
-      0 4px #8cc665,
-      4px 4px #8cc665;
+      0 -4px currentColor,
+      4px 0 currentColor,
+      -4px 4px currentColor,
+      0 4px currentColor,
+      4px 4px currentColor;
   }

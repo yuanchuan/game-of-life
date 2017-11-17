@@ -140,9 +140,8 @@
     }
   #gol-controls a[disabled] {
     background: transparent;
-    border-color: rgba(160, 165, 157, .69);;
-    color: rgba(160, 165, 157, .69);
-    opacity: .5;
+    color: #e0e0e0;
+    border-color: currentColor;
     cursor: default;
   }
   #gol-controls a[data-action="run"]:not([disabled]):hover:before {

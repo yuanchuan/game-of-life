@@ -21,7 +21,7 @@
 #gol-contribution-board {
   position: absolute;
   top: -4px;
-  left: -7px;
+  left: -4px;
   width: calc(100% + 8px);
   height: 100%;
   background: #fff;
@@ -155,8 +155,11 @@
   }
 
   #gol-controls a[data-action="reset"] {
-      width: 2.5em;
-      background: #fff;
+    width: 2.5em;
+    background: #fff;
+  }
+  #gol-controls a[data-action="reset"][disabled] {
+    opacity: .5;
   }
     #gol-controls a[data-action="reset"]:after {
       content: '_';

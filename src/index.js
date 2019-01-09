@@ -496,7 +496,10 @@
   }
 
   Game.init = function() {
-    var graph = document.querySelector('.js-contribution-graph')
+    var graph = document.querySelector('.js-yearly-contributions')
+    if (hasActiveOverview()) {
+      graph.setAttribute('gol-layout-overview', true)
+    }
     var id = 'gol-button-play'
     if (graph && !document.getElementById(id)) {
       var play = document.createElement('a')
@@ -623,6 +626,10 @@
       }
     }
   })
+
+  function hasActiveOverview() {
+    return document.querySelector('.js-activity-overview-graph-container')
+  }
 
   function detectPjaxEnd(fn, attempt) {
     if (!attempt) {

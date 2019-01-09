@@ -48,6 +48,16 @@
     border: 1px solid #fff;
   }
 
+[gol-layout-overview] #gol-contribution-board {
+  height: calc(100% + 4em);
+  top: 2px;
+  z-index: 10;
+}
+  [gol-layout-overview] #gol-contribution-board li {
+    width: 10px;
+    height: 10px;
+  }
+
 
 #gol-controls {
   position: absolute;
@@ -55,6 +65,11 @@
   width: 100%;
   bottom: -32px;
   padding-left: 40px;
+}
+[gol-layout-overview] #gol-controls {
+  z-index: 11;
+  background: #fff;
+  bottom: -24px;
 }
   #gol-controls a {
     display: inline-block;

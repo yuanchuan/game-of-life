@@ -49,9 +49,21 @@
   }
 
 [gol-layout-overview] #gol-contribution-board {
-  height: calc(100% + 4em);
+  height: calc(100% + 3.5em);
   top: 2px;
   z-index: 10;
+}
+[gol-layout-overview] #gol-contribution-board:before {
+  content: '';
+  position: absolute;
+  width: calc(100% - 8px);
+  margin: 0 auto;
+  bottom: 0;
+  height: 5px;
+  border-radius: 3px 3px 0 0;
+  border: 1px solid #d1d5da;
+  border-bottom: none;
+  left: 3px;
 }
   [gol-layout-overview] #gol-contribution-board li {
     width: 10px;
@@ -140,6 +152,7 @@
   }
   #gol-controls a[data-action="pause"] {
     box-shadow: currentColor 0px 0px 0px 1px;
+    filter: hue-rotate(-20deg);
   }
     #gol-controls a[data-action="run"]:before,
     #gol-controls a[data-action="pause"]:before {

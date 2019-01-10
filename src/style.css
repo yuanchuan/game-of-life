@@ -76,6 +76,7 @@
   width: 100%;
   bottom: -32px;
   padding-left: 40px;
+  z-index: 1;
 }
 [gol-layout-overview] #gol-controls {
   z-index: 11;

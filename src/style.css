@@ -12,7 +12,6 @@
   }
   [data-gol-container]:not([data-gol-container="running"])
   #gol-contribution-board li:hover {
-    cursor: pointer;
     z-index: 2;
     outline: 1px solid rgba(30, 104, 35, .55);
   }
@@ -93,7 +92,7 @@
     font-size: .8em;
     text-decoration: none;
     color: var(--color, #8cc665);
-    box-shadow: currentColor 0px 0px 0px .65px;
+    box-shadow: currentColor 0px 0px 0px 1px;
     border-radius: 2px;
     cursor: pointer;
   }
@@ -151,7 +150,6 @@
     position: relative;
   }
   #gol-controls a[data-action="pause"] {
-    box-shadow: currentColor 0px 0px 0px 1px;
     filter: hue-rotate(-20deg);
   }
     #gol-controls a[data-action="run"]:before,
@@ -175,18 +173,24 @@
   #gol-controls a[data-action="run"]:not([disabled]):hover:before {
     opacity: .15;
   }
+  #gol-controls a[data-action="next"]:not([disabled]),
+  #gol-controls a[data-action="clear"]:not([disabled]),
+  #gol-controls a[data-action="reset"]:not([disabled]) {
+    opacity: .7;
+  }
   #gol-controls a[data-action="next"]:not([disabled]):hover,
   #gol-controls a[data-action="clear"]:not([disabled]):hover,
   #gol-controls a[data-action="reset"]:not([disabled]):hover {
-    color: var(--color, #8cc665);
-    box-shadow: currentColor 0px 0px 0px 1px;
+    opacity: 1;
   }
 
   #gol-controls a[data-action="reset"] {
     width: 2.5em;
     background: #fff;
+    will-change: opacity;
   }
   #gol-controls a[data-action="reset"][disabled] {
+    filter: grayscale(1);
     opacity: .5;
   }
     #gol-controls a[data-action="reset"]:after {
@@ -201,26 +205,20 @@
       left: 50%;
       bottom: 100%;
       transform: translate(-50%, -2px);
-      opacity: 0;
-      z-index: -1;
       min-width: 8em;
       margin-bottom: 4px;
       border-radius: 2px;
       padding: 4px 8px;
       text-algin: center;
-      background: rgba(0, 0, 0, .4);
+      background: rgba(0, 0, 0, .5);
       color: #fff;
+      display: none;
     }
     [data-gol-container=""]
     #gol-controls a[title]:not([title=""])[data-action="reset"]:hover:before {
+      display: block;
       transform: translate(-50%, 0);
-      opacity: 1;
       z-index: 9;
-      will-change: transform;
-      transition:
-        transform .3s cubic-bezier(0.19, 1, 0.22, 1),
-        opacity .2s cubic-bezier(0.19, 1, 0.22, 1);
-      transition-delay: .2s;
     }
 
 

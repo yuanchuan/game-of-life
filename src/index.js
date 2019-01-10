@@ -273,20 +273,39 @@
     var emptyCells = repeat(COL,
       '<ul>' + repeat(ROW, '<li></li>') + '</ul>'
     )
-    function toggle(e) {
-      e.stopPropagation()
-      var cell = e.target
-      if (isTagName('li', cell)) {
-        Canvas.ontoggle && Canvas.ontoggle(cell)
+
+    function targetCell(fn) {
+      return function(e) {
+        e.stopPropagation()
+        var cell = e.target
+        if (isTagName('li', cell)) {
+          fn(cell, e);
+        }
       }
     }
+    var toggle = targetCell(function(cell) {
+      if (Canvas.activeDrawing) {
+        Canvas.ontoggle && Canvas.ontoggle(cell)
+      }
+    })
+    var activeDrawing = targetCell(function(cell, e) {
+      Canvas.activeDrawing = true
+      toggle(e)
+    })
+    var inActiveDrawing = targetCell(function() {
+      Canvas.activeDrawing = false
+    })
+
     return {
       build: function() {
         if (canvas) return canvas
         canvas = document.createElement('div')
         canvas.id = id
         canvas.innerHTML = emptyCells
-        canvas.addEventListener('click', toggle)
+        canvas.addEventListener('mouseover', toggle)
+        canvas.addEventListener('mousedown', activeDrawing)
+        canvas.addEventListener('mouseup', inActiveDrawing)
+
         forEachList(canvas.querySelectorAll('ul'), 'li', function(x, y, elem) {
           var key = getKey(x, y)
           cells[key] = elem
@@ -342,7 +361,9 @@
       remove: function() {
         cells = {}
         if (canvas) {
-          canvas.removeEventListener('click', toggle)
+          canvas.removeEventListener('mouseover', toggle)
+          canvas.removeEventListener('mousedown', activeDrawing)
+          canvas.removeEventListener('mouseup', inActiveDrawing)
           canvas.parentNode.removeChild(canvas)
           canvas = null
         }
@@ -505,7 +526,7 @@
       var play = document.createElement('a')
       var legend = document.querySelector('.contrib-legend')
       COLOR_ALIVE = getComputedStyle(legend.querySelector('.legend li:nth-child(3)')).backgroundColor
-      play.style.setProperty('--color', COLOR_ALIVE);
+      play.style.setProperty('--color', COLOR_ALIVE)
       play.id = id
       play.title = "Play Conway's Game of Life"
       play.innerHTML = 'Play'
@@ -527,7 +548,7 @@
     gc.appendChild(Controls.build())
 
     Game.reset(true)
-    Canvas.fixAlignment();
+    Canvas.fixAlignment()
     Controls
       .apply('hide', 'pause')
       .apply('setTitle', 'reset', 'select pattern')

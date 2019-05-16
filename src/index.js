@@ -1,7 +1,7 @@
 (function() {
 
   var ROW = 13
-  var COL = 61
+  var COL = 59
   var TOTAL = ROW * COL
   var COLOR_DEAD = '#ebedf0'
   var COLOR_ALIVE = '#8cc665'
@@ -279,7 +279,7 @@
         e.stopPropagation()
         var cell = e.target
         if (isTagName('li', cell)) {
-          fn(cell, e);
+          fn(cell, e)
         }
       }
     }
@@ -396,7 +396,7 @@
         controls = document.createElement('div')
         controls.id = id
         controls.innerHTML = content
-        controls.style.setProperty('--color', COLOR_ALIVE);
+        controls.style.setProperty('--color', COLOR_ALIVE)
         actions.forEach(function(name) {
           buttons[name] = controls.querySelector('[data-action="' + name + '"]')
         })
@@ -452,7 +452,7 @@
     var pallette = {}
     forEachList(gs, 'rect', function(x, y, rect) {
       var color = fillColor(rect)
-      var dx = x + 3, dy = y + 5
+      var dx = x + 3, dy = y + 3
       board[dx][dy] = (color === COLOR_DEAD) ? 0 : 1
       pallette[getKey(dx, dy)] = color
     })
@@ -520,7 +520,13 @@
     var graph = document.querySelector('.js-yearly-contributions')
     if (hasActiveOverview()) {
       graph.setAttribute('gol-layout-overview', true)
+    } else {
+      let cal = document.querySelector('.graph-before-activity-overview')
+      if (cal) {
+        cal.style.transform = 'translateY(10px)'
+      }
     }
+
     var id = 'gol-button-play'
     if (graph && !document.getElementById(id)) {
       var play = document.createElement('a')

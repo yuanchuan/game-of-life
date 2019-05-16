@@ -19,11 +19,12 @@
 
 #gol-contribution-board {
   position: absolute;
-  top: -4px;
-  left: -4px;
+  top: -14px;
+  left: 10px;
   width: calc(100% + 8px);
   height: 100%;
   background: #fff;
+  display: flex;
 }
   #gol-contribution-board:after {
     content: '';
@@ -31,27 +32,28 @@
     display: block;
     visibility: hidden;
   }
-  #gol-contribution-board ul {
-    float: left;
-  }
   #gol-contribution-board li {
     display: block;
     font-size: 0;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     background-color: #eee;
     transition: background-color .2s ease;
     position: relative;
     z-index: 1;
     box-sizing: border-box;
     border: 1px solid #fff;
+    margin-left: 1px;
+    margin-bottom: 1px;
   }
 
 [gol-layout-overview] #gol-contribution-board {
-  height: calc(100% + 3.5em);
-  top: 2px;
+  height: calc(100% + 62px);
   z-index: 10;
+  top: -8px;
+  left: -1px;
 }
+
 [gol-layout-overview] #gol-contribution-board:before {
   content: '';
   position: absolute;
@@ -62,13 +64,12 @@
   border-radius: 3px 3px 0 0;
   border: 1px solid #d1d5da;
   border-bottom: none;
-  left: 3px;
+  left: 0;
 }
   [gol-layout-overview] #gol-contribution-board li {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
-
 
 #gol-controls {
   position: absolute;
@@ -76,12 +77,11 @@
   width: 100%;
   bottom: -32px;
   padding-left: 40px;
-  z-index: 1;
+  z-index: 11;
+  background: transparent;
 }
 [gol-layout-overview] #gol-controls {
-  z-index: 11;
   background: #fff;
-  bottom: -24px;
 }
   #gol-controls a {
     display: inline-block;
@@ -235,10 +235,13 @@
 
 #gol-generation {
   position: absolute;
-  left: 0px;
+  left: 1em;
   top: -10px;
   font-size: 12px;
   color: #b6b6b6;
+}
+[gol-layout-overview] #gol-generation {
+  left: 0;
 }
   #gol-generation:before {
     content: 'Generation: ';

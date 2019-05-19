@@ -1,7 +1,7 @@
 (function() {
 
   var ROW = 13
-  var COL = 59
+  var COL = 60
   var TOTAL = ROW * COL
   var COLOR_DEAD = '#ebedf0'
   var COLOR_ALIVE = '#8cc665'
@@ -452,7 +452,7 @@
     var pallette = {}
     forEachList(gs, 'rect', function(x, y, rect) {
       var color = fillColor(rect)
-      var dx = x + 3, dy = y + 3
+      var dx = x + 3, dy = y + 4
       board[dx][dy] = (color === COLOR_DEAD) ? 0 : 1
       pallette[getKey(dx, dy)] = color
     })

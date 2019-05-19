@@ -20,7 +20,7 @@
 #gol-contribution-board {
   position: absolute;
   top: -14px;
-  left: 10px;
+  left: 13px;
   width: calc(100% + 8px);
   height: 100%;
   background: #fff;
@@ -51,7 +51,7 @@
   height: calc(100% + 62px);
   z-index: 10;
   top: -8px;
-  left: -1px;
+  left: -6px;
 }
 
 [gol-layout-overview] #gol-contribution-board:before {
@@ -64,7 +64,7 @@
   border-radius: 3px 3px 0 0;
   border: 1px solid #d1d5da;
   border-bottom: none;
-  left: 0;
+  left: 5px;
 }
   [gol-layout-overview] #gol-contribution-board li {
     width: 12px;
@@ -235,7 +235,7 @@
 
 #gol-generation {
   position: absolute;
-  left: 1em;
+  left: 16px;
   top: -10px;
   font-size: 12px;
   color: #b6b6b6;

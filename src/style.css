@@ -51,7 +51,7 @@
   height: calc(100% + 62px);
   z-index: 10;
   top: -8px;
-  left: -6px;
+  left: -5px;
 }
 
 [gol-layout-overview] #gol-contribution-board:before {
